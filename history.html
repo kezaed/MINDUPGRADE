@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HISTORY Quiz - MINDUPGRADE</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f9f5f0, #e0d8d0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .quiz-container {
+    background: #fff;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 500px;
+    max-width: 90%;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .question {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+  }
+  .options li {
+    margin-bottom: 10px;
+  }
+  .options button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  .options button:hover {
+    background: #e6d9c3;
+  }
+  .timer {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ff4444;
+  }
+  .score-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .score-container h2 {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+  <h1>HISTORY & POLITICS Quiz</h1>
+  <div class="timer">Time: <span id="time">30</span>s</div>
+  <div class="question" id="question">Question will appear here</div>
+  <ul class="options" id="options">
+    <!-- Options will appear here -->
+  </ul>
+  <div class="score-container" id="score-container" style="display:none;">
+    <h2>Your Score: <span id="score"></span>/20</h2>
+    <p id="rating"></p>
+  </div>
+</div>
+
+<script>
+const historyQuestions = [
+  { question: "Which U.S. president had a pet alligator in the White House?", options: ["John Quincy Adams", "Abraham Lincoln", "Theodore Roosevelt", "Thomas Jefferson"], answer: "John Quincy Adams" },
+  { question: "Which country tried to invade itself due to a cartography error in the 1800s?", options: ["France", "Spain", "Portugal", "Russia"], answer: "France" },
+  { question: "Which king supposedly farted to clear the room during a diplomatic meeting?", options: ["Louis XIV", "Henry VIII", "Charles II", "George III"], answer: "Louis XIV" },
+  { question: "Which country once declared war on a tree?", options: ["Honduras", "Australia", "Canada", "Germany"], answer: "Honduras" },
+  { question: "Which political leader had a collection of over 100,000 buttons?", options: ["Winston Churchill", "Vladimir Lenin", "Franklin Roosevelt", "Benjamin Franklin"], answer: "Winston Churchill" },
+  { question: "Which president played football with the French president on the White House lawn?", options: ["George H.W. Bush", "John F. Kennedy", "Jimmy Carter", "Ronald Reagan"], answer: "George H.W. Bush" },
+  { question: "Which world leader had a pet bear as a gift from a constituent?", options: ["Theodore Roosevelt", "Joseph Stalin", "Harry Truman", "Charles de Gaulle"], answer: "Theodore Roosevelt" },
+  { question: "Which politician accidentally ate a live octopus during a cultural event?", options: ["Vladimir Putin", "Kim Jong-un", "Nicolas Sarkozy", "Emmanuel Macron"], answer: "Vladimir Putin" },
+  { question: "Which country’s parliament once passed a law banning chewing gum?", options: ["Singapore", "Thailand", "Japan", "South Korea"], answer: "Singapore" },
+  { question: "Which historical figure was known to play pranks by sneaking frogs into official meetings?", options: ["Benjamin Franklin", "Napoleon Bonaparte", "Winston Churchill", "Mark Twain"], answer: "Benjamin Franklin" },
+  { question: "Which U.S. president threw a birthday party for a donkey?", options: ["Andrew Jackson", "James Madison", "Thomas Jefferson", "Grover Cleveland"], answer: "Andrew Jackson" },
+  { question: "Which country once elected a dead man as mayor?", options: ["Mexico", "France", "Italy", "Brazil"], answer: "Mexico" },
+  { question: "Which king accidentally signed his own bill to tax hats?", options: ["Louis XVI", "Henry VIII", "Charles I", "George IV"], answer: "Louis XVI" },
+  { question: "Which country’s leader once tried to rename a month after himself?", options: ["Romania", "Italy", "Russia", "Germany"], answer: "Romania" },
+  { question: "Which famous athlete became a governor and wore mismatched socks for good luck?", options: ["Arnold Schwarzenegger", "Bill Bradley", "Jack Kemp", "Manny Pacquiao"], answer: "Arnold Schwarzenegger" },
+  { question: "Which ancient ruler had a pet giraffe imported to his palace?", options: ["King Henry VIII", "Ptolemy IV", "Julius Caesar", "Queen Elizabeth I"], answer: "Ptolemy IV" },
+  { question: "Which U.S. president once raced a horse against a speeding train?", options: ["Theodore Roosevelt", "Abraham Lincoln", "Ulysses S. Grant", "Calvin Coolidge"], answer: "Theodore Roosevelt" },
+  { question: "Which world leader sent a submarine to deliver ice cream to troops?", options: ["Winston Churchill", "Franklin Roosevelt", "Joseph Stalin", "Harry Truman"], answer: "Winston Churchill" },
+  { question: "Which historical figure accidentally invented a game of hide and seek to teach kids strategy?", options: ["Sun Tzu", "Benjamin Franklin", "Confucius", "Plato"], answer: "Benjamin Franklin" },
+  { question: "Which prime minister had a policy to paint all government offices bright pink to boost morale?", options: ["Józef Piłsudski", "David Lloyd George", "Pierre Trudeau", "Margaret Thatcher"], answer: "Józef Piłsudski" }
+];
+
+let current = 0;
+let score = 0;
+let timer;
+let timeLeft = 30;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const timeEl = document.getElementById("time");
+const scoreContainer = document.getElementById("score-container");
+const scoreEl = document.getElementById("score");
+const ratingEl = document.getElementById("rating");
+
+function loadQuestion() {
+  if (current >= historyQuestions.length) {
+    endQuiz();
+    return;
+  }
+  timeLeft = 30;
+  timeEl.textContent = timeLeft;
+  questionEl.textContent = `${current + 1}. ${historyQuestions[current].question}`;
+  optionsEl.innerHTML = "";
+  historyQuestions[current].options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(opt);
+    const li = document.createElement("li");
+    li.appendChild(btn);
+    optionsEl.appendChild(li);
+  });
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      current++;
+      loadQuestion();
+    }
+  }, 1000);
+}
+
+function selectAnswer(answer) {
+  clearInterval(timer);
+  if (answer === historyQuestions[current].answer) score++;
+  current++;
+  loadQuestion();
+}
+
+function endQuiz() {
+  document.getElementById("question").style.display = "none";
+  optionsEl.style.display = "none";
+  document.querySelector(".timer").style.display = "none";
+  scoreContainer.style.display = "block";
+  scoreEl.textContent = score;
+  let rating;
+  if (score === 20) rating = "Incredible! History & Politics Master!";
+  else if (score >= 16) rating = "Amazing! Your historical knowledge is impressive!";
+  else if (score >= 12) rating = "Great! You know your funny history well!";
+  else if (score >= 8) rating = "Not bad, but these are tough even for specialists!";
+  else rating = "Keep trying! Even experts find these tricky!";
+  ratingEl.textContent = rating;
+}
+
+// Load first question
+loadQuestion();
+</script>
+</body>
+</html>
