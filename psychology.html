@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSYCHOLOGY Quiz - MINDUPGRADE</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f0f5f9, #d0e1f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .quiz-container {
+    background: #fff;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 500px;
+    max-width: 90%;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .question {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+  }
+  .options li {
+    margin-bottom: 10px;
+  }
+  .options button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  .options button:hover {
+    background: #cfe0f3;
+  }
+  .timer {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ff4444;
+  }
+  .score-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .score-container h2 {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <img src="73ecdfa5-0225-4e45-aedc-1dfc82017e07.jpeg" alt="background" class="bg-image">
+<div class="quiz-container">
+  <h1>PSYCHOLOGY Quiz</h1>
+  <div class="timer">Time: <span id="time">30</span>s</div>
+  <div class="question" id="question">Question will appear here</div>
+  <ul class="options" id="options">
+    <!-- Options will appear here -->
+  </ul>
+  <div class="score-container" id="score-container" style="display:none;">
+    <h2>Your Score: <span id="score"></span>/20</h2>
+    <p id="rating"></p>
+  </div>
+</div>
+
+<script>
+const psychologyQuestions = [
+  { question: "Which common behavior is known as the 'IKEA effect'?", options: ["Overvaluing your own work", "Procrastination", "Groupthink", "Cognitive dissonance"], answer: "Overvaluing your own work" },
+  { question: "What funny habit do people often have when thinking deeply?", options: ["Chewing on pens", "Jumping", "Clapping hands", "Tapping feet"], answer: "Chewing on pens" },
+  { question: "Which psychological effect explains why people laugh more in groups than alone?", options: ["Contagious laughter", "Social inhibition", "Mirror neurons", "Herd mentality"], answer: "Contagious laughter" },
+  { question: "Which theory suggests people behave differently when they know they're being watched?", options: ["Hawthorne effect", "Placebo effect", "Cognitive bias", "Pygmalion effect"], answer: "Hawthorne effect" },
+  { question: "Which bias makes people remember unusual events better than normal ones?", options: ["Von Restorff effect", "Confirmation bias", "Recency effect", "Anchoring bias"], answer: "Von Restorff effect" },
+  { question: "Which phenomenon explains why political debates often seem funnier than expected?", options: ["Benign violation theory", "False consensus effect", "Illusion of transparency", "Stereotype threat"], answer: "Benign violation theory" },
+  { question: "Which type of memory often tricks athletes during high-pressure games?", options: ["Working memory overload", "False memory", "Muscle memory", "Procedural memory"], answer: "Working memory overload" },
+  { question: "Which effect occurs when watching someone fail makes us giggle?", options: ["Schadenfreude", "Spotlight effect", "Halo effect", "Mere exposure effect"], answer: "Schadenfreude" },
+  { question: "Which cognitive bias makes people overestimate how funny they are?", options: ["Overconfidence bias", "Dunning-Kruger effect", "Optimism bias", "Availability heuristic"], answer: "Dunning-Kruger effect" },
+  { question: "Which unusual behavior is seen when politicians are nervous?", options: ["Fixing tie repeatedly", "Blinking slowly", "Crossing arms", "Tapping fingers"], answer: "Fixing tie repeatedly" },
+  { question: "Which phenomenon describes the human brain’s tendency to find patterns in randomness?", options: ["Apophenia", "Pareidolia", "Illusory correlation", "Gambler’s fallacy"], answer: "Apophenia" },
+  { question: "Which psychological trick makes sports fans believe their team is lucky?", options: ["Superstitious conditioning", "Confirmation bias", "Placebo effect", "Self-serving bias"], answer: "Superstitious conditioning" },
+  { question: "Which effect describes why watching a political speech can be more entertaining than reading it?", options: ["Affective forecasting", "Narrative transportation", "Benign violation", "Cognitive dissonance"], answer: "Narrative transportation" },
+  { question: "Which quirk explains why people clap randomly during award ceremonies?", options: ["Contagion effect", "Herd behavior", "Social proof", "Mimicry"], answer: "Contagion effect" },
+  { question: "Which bias makes people overestimate their own knowledge about sports trivia?", options: ["Illusion of knowledge", "Optimism bias", "Confirmation bias", "Self-serving bias"], answer: "Illusion of knowledge" },
+  { question: "Which psychological effect explains why funny political memes go viral?", options: ["Emotional contagion", "Spotlight effect", "Framing effect", "Bandwagon effect"], answer: "Emotional contagion" },
+  { question: "Which phenomenon causes people to misremember humorous historical events?", options: ["Memory distortion", "Hindsight bias", "False memory", "Availability heuristic"], answer: "False memory" },
+  { question: "Which quirky effect makes athletes talk to themselves during competition?", options: ["Self-talk", "Cognitive restructuring", "Rehearsal effect", "Metacognition"], answer: "Self-talk" },
+  { question: "Which bias makes fans exaggerate a player’s funny mistake?", options: ["Negativity bias", "Availability heuristic", "Confirmation bias", "Overconfidence bias"], answer: "Negativity bias" },
+  { question: "Which funny phenomenon explains why humans laugh at unexpected sports blunders?", options: ["Incongruity theory", "Benign violation", "Surprise bias", "Moral licensing"], answer: "Incongruity theory" }
+];
+
+let current = 0;
+let score = 0;
+let timer;
+let timeLeft = 30;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const timeEl = document.getElementById("time");
+const scoreContainer = document.getElementById("score-container");
+const scoreEl = document.getElementById("score");
+const ratingEl = document.getElementById("rating");
+
+function loadQuestion() {
+  if (current >= psychologyQuestions.length) {
+    endQuiz();
+    return;
+  }
+  timeLeft = 30;
+  timeEl.textContent = timeLeft;
+  questionEl.textContent = `${current + 1}. ${psychologyQuestions[current].question}`;
+  optionsEl.innerHTML = "";
+  psychologyQuestions[current].options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(opt);
+    const li = document.createElement("li");
+    li.appendChild(btn);
+    optionsEl.appendChild(li);
+  });
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      current++;
+      loadQuestion();
+    }
+  }, 1000);
+}
+
+function selectAnswer(answer) {
+  clearInterval(timer);
+  if (answer === psychologyQuestions[current].answer) score++;
+  current++;
+  loadQuestion();
+}
+
+function endQuiz() {
+  document.getElementById("question").style.display = "none";
+  optionsEl.style.display = "none";
+  document.querySelector(".timer").style.display = "none";
+  scoreContainer.style.display = "block";
+  scoreEl.textContent = score;
+  let rating;
+  if (score === 20) rating = "Unbelievable! You’re a Psychology Genius!";
+  else if (score >= 16) rating = "Amazing! Your mind-reading skills are excellent!";
+  else if (score >= 12) rating = "Great! You understand human behavior well!";
+  else if (score >= 8) rating = "Not bad, but specialists could still outsmart you!";
+  else rating = "Keep trying! Even experts find these tricky!";
+  ratingEl.textContent = rating;
+}
+
+// Load first question
+loadQuestion();
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIBLE Quiz - MINDUPGRADE</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #fff8e1, #ffe082);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .quiz-container {
+    background: #fff;
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 500px;
+    max-width: 90%;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .question {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+  }
+  .options li {
+    margin-bottom: 10px;
+  }
+  .options button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #888;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  .options button:hover {
+    background: #ffd54f;
+  }
+  .timer {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ff4444;
+  }
+  .score-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .score-container h2 {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<img src="download (7).jpeg" alt="background" class="bg-image">
+<body>
+<div class="quiz-container">
+  <h1>BIBLE Quiz</h1>
+  <div class="timer">Time: <span id="time">30</span>s</div>
+  <div class="question" id="question">Question will appear here</div>
+  <ul class="options" id="options"></ul>
+  <div class="score-container" id="score-container" style="display:none;">
+    <h2>Your Score: <span id="score"></span>/20</h2>
+    <p id="rating"></p>
+  </div>
+</div>
+
+<script>
+const bibleQuestions = [
+  { question: "Who was the first person in the Bible to break a commandment?", options: ["Cain", "Adam", "Abel", "Seth"], answer: "Cain" },
+  { question: "Which Old Testament prophet was commanded to marry a prostitute as a sign?", options: ["Hosea", "Jeremiah", "Ezekiel", "Amos"], answer: "Hosea" },
+  { question: "Who saw a vision of a valley full of dry bones?", options: ["Ezekiel", "Isaiah", "Jeremiah", "Daniel"], answer: "Ezekiel" },
+  { question: "Which king was warned by a floating hand writing on a wall?", options: ["Belshazzar", "Nebuchadnezzar", "Darius", "Ahasuerus"], answer: "Belshazzar" },
+  { question: "Which apostle is known as the 'weeping apostle'?", options: ["Peter", "John", "Thomas", "Judas"], answer: "Peter" },
+  { question: "How many chapters are in the Book of Obadiah?", options: ["1", "3", "5", "7"], answer: "1" },
+  { question: "Which minor prophet was swallowed by a large fish?", options: ["Jonah", "Nahum", "Micah", "Hosea"], answer: "Jonah" },
+  { question: "Who lived 969 years according to the Bible?", options: ["Methuselah", "Noah", "Adam", "Enoch"], answer: "Methuselah" },
+  { question: "Which king was a musician and also wrote many Psalms?", options: ["David", "Solomon", "Saul", "Hezekiah"], answer: "David" },
+  { question: "Which book contains the phrase 'Vanity of vanities; all is vanity'?", options: ["Ecclesiastes", "Proverbs", "Song of Songs", "Isaiah"], answer: "Ecclesiastes" },
+  { question: "Who refused to bow to King Nebuchadnezzar’s idol and was thrown into a fiery furnace?", options: ["Shadrach, Meshach, Abednego", "Daniel", "Joseph", "Elijah"], answer: "Shadrach, Meshach, Abednego" },
+  { question: "Which prophet confronted King Ahab and Queen Jezebel over Naboth’s vineyard?", options: ["Elijah", "Elisha", "Isaiah", "Amos"], answer: "Elijah" },
+  { question: "Who carried the Ark of the Covenant and caused the walls of Jericho to fall?", options: ["Joshua", "Moses", "Aaron", "Caleb"], answer: "Joshua" },
+  { question: "Which Psalm is the longest in the Bible?", options: ["Psalm 119", "Psalm 23", "Psalm 91", "Psalm 150"], answer: "Psalm 119" },
+  { question: "Who was struck dumb until the day of John the Baptist’s birth?", options: ["Zechariah", "Simeon", "Joseph", "Elijah"], answer: "Zechariah" },
+  { question: "Which book describes a prophet’s vision of four living creatures with six wings each?", options: ["Isaiah", "Ezekiel", "Daniel", "Revelation"], answer: "Isaiah" },
+  { question: "Who was the first judge of Israel after Joshua?", options: ["Othniel", "Gideon", "Ehud", "Deborah"], answer: "Othniel" },
+  { question: "Which disciple was a tax collector before following Jesus?", options: ["Matthew", "Simon Peter", "Andrew", "Philip"], answer: "Matthew" },
+  { question: "Which book mentions the 'Valley of Decision'?", options: ["Joel", "Habakkuk", "Amos", "Micah"], answer: "Joel" },
+  { question: "Who was the prophet taken up to heaven in a whirlwind?", options: ["Elijah", "Enoch", "Moses", "Isaiah"], answer: "Elijah" }
+];
+
+
+let current = 0;
+let score = 0;
+let timer;
+let timeLeft = 30;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const timeEl = document.getElementById("time");
+const scoreContainer = document.getElementById("score-container");
+const scoreEl = document.getElementById("score");
+const ratingEl = document.getElementById("rating");
+
+function loadQuestion() {
+  if (current >= bibleQuestions.length) {
+    endQuiz();
+    return;
+  }
+  timeLeft = 30;
+  timeEl.textContent = timeLeft;
+  questionEl.textContent = `${current + 1}. ${bibleQuestions[current].question}`;
+  optionsEl.innerHTML = "";
+  bibleQuestions[current].options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(opt);
+    const li = document.createElement("li");
+    li.appendChild(btn);
+    optionsEl.appendChild(li);
+  });
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      current++;
+      loadQuestion();
+    }
+  }, 1000);
+}
+
+function selectAnswer(answer) {
+  clearInterval(timer);
+  if (answer === bibleQuestions[current].answer) score++;
+  current++;
+  loadQuestion();
+}
+
+function endQuiz() {
+  document.getElementById("question").style.display = "none";
+  optionsEl.style.display = "none";
+  document.querySelector(".timer").style.display = "none";
+  scoreContainer.style.display = "block";
+  scoreEl.textContent = score;
+  let rating;
+  if (score === 20) rating = "Unbelievable! You’re a Bible Genius!";
+  else if (score >= 16) rating = "Amazing! You know your Word of God very well!";
+  else if (score >= 12) rating = "Great! You understand the Bible deeply!";
+  else if (score >= 8) rating = "Not bad, but keep studying God’s Word!";
+  else rating = "Keep trying! Even specialists can struggle with these!";
+  ratingEl.textContent = rating;
+}
+
+// Load first question
+loadQuestion();
+</script>
+</body>
+</html>
