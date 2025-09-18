@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINDUPGRADE – Signup</title>
-  <title>MINDUPGRADE – How It Works</title>
+  <title>MINDUPGRADE – Home</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -16,220 +15,122 @@
     }
 
     body {
-      height: 100vh;
-      background: url("https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 0;
-    }
-
-    .signup-container {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      width: 350px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 1.5rem;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.7rem 0;
-      border: none;
-      border-radius: 10px;
-      outline: none;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.9rem;
-      margin-top: 1rem;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #2575fc, #6a11cb);
-    }
-
-    p {
-      margin-top: 1rem;
-      color: #ddd;
-      font-size: 0.9rem;
-    }
-
-    p a {
-      color: #00c6ff;
-      text-decoration: none;
-    }
-
-    p a:hover {
-      text-decoration: underline;
-    }
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
       min-height: 100vh;
-      background: url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
+      background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
       background-size: cover;
       position: relative;
       color: #fff;
-      display: flex;
-      flex-direction: column;
     }
 
     body::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.55);
       z-index: 0;
     }
 
     header {
       position: relative;
       z-index: 1;
-      text-align: center;
-      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #00c6ff, #0072ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .content {
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c6ff;
+    }
+
+    .hero {
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 2rem 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 5% 3rem;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-    }
-
-    .card h3 {
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
       margin-bottom: 1rem;
-      font-size: 1.3rem;
-      color: #fff;
     }
 
-    .card p {
-      font-size: 1rem;
+    .hero p {
+      max-width: 700px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
       color: #ddd;
-      line-height: 1.5;
+    }
+
+    .hero img {
+      width: 300px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border: 4px solid rgba(255,255,255,0.2);
     }
 
     footer {
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 1.5rem;
+      padding: 1rem;
+      margin-top: 2rem;
       background: rgba(0,0,0,0.6);
-      color: #ccc;
       font-size: 0.9rem;
-      margin-top: auto;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
+  <!-- Header Navigation -->
   <header>
-    <h1>Welcome to MINDUPGRADE</h1>
-    <p>Elevate your knowledge through fun, surprising, and interactive quizzes.</p>
+    <h1>MINDUPGRADE</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="login.html">Login</a>
+      <a href="works.html">How It Works</a>
+      <a href="departments.html">Departments</a>
+    </nav>
   </header>
 
-  <section class="content">
-    <div class="card">
-      <h3>🎯 How It Works</h3>
-      <p>Choose from different categories like Sports, Science, History, Psychology, and Real Life. Each category contains entertaining, tricky, and mind-blowing questions designed to boost your critical thinking.</p>
-    </div>
-
-    <div class="card">
-      <h3>📊 Scoring & Ratings</h3>
-      <p>After completing a quiz, get your score instantly and receive a motivational rating such as <i>"You're a Genius!"</i> or <i>"Keep Practicing!"</i>. This keeps learning fun and engaging.</p>
-    </div>
-
-    <div class="card">
-      <h3>🌙 Light & Dark Mode</h3>
-      <p>Switch between modes for a comfortable experience. Our design adapts to your preference, making the interface professional and modern.</p>
-    </div>
-
-    <div class="card">
-      <h3>🌐 Learn Anywhere</h3>
-      <p>MINDUPGRADE is fully responsive and works seamlessly on mobile, tablet, and desktop so you can challenge your mind anytime, anywhere.</p>
-    </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Boost Your Mind with Fun Quizzes</h2>
+    <p>
+      Welcome to <b>MINDUPGRADE</b>, your ultimate hub for interactive learning.  
+      Dive into exciting categories like Sports, Science, History, Psychology, Real Life and more.  
+      Test your knowledge with surprising, shocking, and entertaining quizzes designed to make learning enjoyable.
+    </p>
+    <img src="https://images.unsplash.com/photo-1581090700227-4c4b9078e3d7?auto=format&fit=crop&w=600&q=80" alt="MindUpgrade Illustration">
   </section>
 
+  <!-- Footer -->
   <footer>
     &copy; 2025 MINDUPGRADE. All rights reserved.
-  </footer
-  </style>
-</head>
-<body>
-  <div class="signup-container">
-    <h2>Create Account</h2>
-    <form action="works.html" method="GET">
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email Address" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
-  </div>
-   <footer>
-    &copy; 2025 MINDUPGRADE. All rights reserved.
-  </footer
+  </footer>
 </body>
 </html>
-
