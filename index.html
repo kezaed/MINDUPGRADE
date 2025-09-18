@@ -308,6 +308,72 @@
     }
     .foot-row{ display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
     .foot-row a{ color: inherit; }
+          margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: url("Готовые шаблоны сторис для Инстаграм_ Красивые….jpeg") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Transparent card container */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05); /* glass effect */
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      width: 350px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .card h2 {
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .card input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.6rem 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .card button:hover {
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+    }
+
+    .card p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .card a {
+      color: #00c6ff;
+      text-decoration: none;
 
     /* Utility */
     .muted{ color: var(--muted); }
@@ -623,4 +689,5 @@ function copyForInstagram() {
   </noscript>
 </body>
 </html>
+
 
