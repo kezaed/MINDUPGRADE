@@ -5,6 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MINDUPGRADE – Home</title>
   <style>
+        /* ---------- Sections ---------- */
+    section{ padding-block: clamp(48px, 8vw, 96px); }
+    .section-header{ text-align: center; margin-bottom: 28px; }
+    .section-header h2{ font-size: clamp(1.6rem, 2.5vw, 2.2rem); margin: 0; }
+    .section-header p{ color: var(--muted); margin-top: 8px; }
+
+    /* About card */
+    .about-card{
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: clamp(20px, 3vw, 32px);
+    }
+
+    /* Cards grid */
+    .grid{
+      display: grid; gap: clamp(16px, 2vw, 24px);
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .col-4{ grid-column: span 4; }
+    @media (max-width: 960px){ .col-4{ grid-column: span 6; } }
+    @media (max-width: 640px){ .col-4{ grid-column: span 12; } }
+
+    .card{
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
+      box-shadow: var(--shadow); transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .card:hover{ transform: translateY(-4px); }
+    .card h3{ margin: 0 0 6px; font-size: 1.1rem; }
+    .card p{ margin: 0; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: rgb(58, 59, 61);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+    }
+
+    /* ---------- Footer ---------- */
+    footer{
+      border-top: 1px solid var(--border); background: var(--surface);
+      padding-block: 24px; color: var(--muted);
+    }
+    .foot-row{ display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .foot-row a{ color: inherit; }
+          margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: url("Готовые шаблоны сторис для Инстаграм_ Красивые….jpeg") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Transparent card container */
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05); /* glass effect */
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      width: 350px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .card h2 {
+      margin-bottom: 1rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .card input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.6rem 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .card button {
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .card button:hover {
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+    }
+
+    .card p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .card a {
+      color: #00c6ff;
+      text-decoration: none;
+
+    /* Utility */
+    .muted{ color: var(--muted); }
+    .hide{ display: none !important; }
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
     * {
@@ -105,6 +227,7 @@
   </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
   <!-- Header Navigation -->
   <header>
     <h1>MINDUPGRADE</h1>
@@ -127,6 +250,49 @@
     </p>
     <img src="https://images.unsplash.com/photo-1581090700227-4c4b9078e3d7?auto=format&fit=crop&w=600&q=80" alt="MindUpgrade Illustration">
   </section>
+      <!-- ---------- ABOUT ---------- -->
+    <section id="about" aria-label="About MindUpgrade">
+      <div class="container">
+        <div class="about-card">
+          <div class="section-header">
+            <h2>About MindUpgrade</h2>
+            <p class="muted">Where curiosity meets mastery.</p>
+          </div>
+          <p class="muted" style="margin:0;">
+            MindUpgrade is an intellectual haven crafted to stimulate curiosity, refine critical thought, and elevate the pursuit of knowledge.
+            Through immersive riddles, profound insights, and captivating explorations across science, history, psychology, and beyond,
+            MindUpgrade transforms learning into an inspiring odyssey. It is not merely a platform—it is a catalyst for sharpening the intellect,
+            broadening horizons, and awakening the mind’s fullest potential.
+             <a href="department.html" class="btn">Join Now</a>
+          </p>
+        </div>
+      </div>
+    </section>
+      <!-- ---------- EXPLORE CARDS ---------- -->
+    <section id="explore" aria-label="Explore categories">
+      <div class="container">
+        <div class="section-header">
+          <h2>Explore</h2>
+          <p class="muted">Pick a path and start upgrading.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card col-4">
+            <h3>Quizzes</h3>
+            <p>Curated challenges that stretch your thinking and measure your progress.</p>
+          </article>
+          <article class="card col-4">
+            <h3>Insights</h3>
+            <p>Concise, compelling ideas from across disciplines to enrich perspective.</p>
+          </article>
+          <article class="card col-4">
+            <h3>Daily Brain Boost</h3>
+            <p>Short, potent mental workouts to keep your curiosity in peak form.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
       <!-- ---------- FOOTER ---------- -->
    
   <footer role="contentinfo">
@@ -138,8 +304,8 @@
         <a href="login.html" rel="nofollow">Login</a> • <a href="signup.html" rel="nofollow">Sign Up</a>
       </div>
     </div>
-    &copy; 2025 MINDUPGRADE. All rights reserved.
   </footer>
 </body>
 </html>
+
 
