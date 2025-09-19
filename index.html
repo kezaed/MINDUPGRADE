@@ -13,7 +13,7 @@
 
     /* About card */
     .about-card{
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+   
       box-shadow: var(--shadow); padding: clamp(20px, 3vw, 32px);
     }
 
@@ -26,8 +26,7 @@
     @media (max-width: 960px){ .col-4{ grid-column: span 6; } }
     @media (max-width: 640px){ .col-4{ grid-column: span 12; } }
 
-    .card{
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px;
+    .card
       box-shadow: var(--shadow); transition: transform .15s ease, box-shadow .2s ease;
     }
     .card:hover{ transform: translateY(-4px); }
@@ -39,7 +38,7 @@
       gap: 25px;
     }
     .card {
-      background: rgb(58, 59, 61);
+
       border-radius: 12px;
       padding: 30px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -71,7 +70,7 @@
     /* Transparent card container */
     .card {
       position: relative;
-      background: rgba(255, 255, 255, 0.05); /* glass effect */
+      
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 15px;
@@ -110,10 +109,6 @@
       transition: 0.3s ease;
     }
 
-    .card button:hover {
-      background: linear-gradient(135deg, #2575fc, #6a11cb);
-    }
-
     .card p {
       margin-top: 1rem;
       font-size: 0.9rem;
@@ -121,7 +116,6 @@
     }
 
     .card a {
-      color: #00c6ff;
       text-decoration: none;
 
     /* Utility */
@@ -307,5 +301,6 @@
   </footer>
 </body>
 </html>
+
 
 
