@@ -1,142 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINDUPGRADE – Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MindUpgrade – Elevate Your Knowledge</title>
+
+  <link rel="icon" href="/favicon.ico">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    /* ===== Base Styles ===== */
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;font-family:'Poppins',sans-serif;line-height:1.6;
+         background:var(--bg);color:var(--text)}
+    :root{
+      --bg:#ffffff;--text:#111;--muted:#6b7280;
+      --primary:#4e54c8;--primary-2:#8f94fb;
+      --surface:#fff;--border:#e5e7eb;--shadow:0 10px 25px rgba(0,0,0,.15);
     }
-
-    body {
-      min-height: 100vh;
-      background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
-      background-size: cover;
-      position: relative;
-      color: #fff;
+    [data-theme="dark"]{
+      --bg:#0f1115;--text:#eaeaea;--muted:#aaa;
+      --primary:#8f94fb;--primary-2:#4e54c8;
+      --surface:#151823;--border:#333;--shadow:0 10px 25px rgba(0,0,0,.5);
     }
+    .container{max-width:1200px;margin:auto;padding:0 20px}
 
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 0;
-    }
+    /* ===== Navbar ===== */
+    nav{position:sticky;top:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);z-index:50}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;height:64px;color:#fff}
+    .brand{font-weight:700;font-size:1.2rem}
+    .brand span{color:var(--primary-2)}
+    .nav-links{display:flex;gap:22px}
+    .nav-links a{color:#fff;text-decoration:none;font-weight:500}
+    .nav-links a:hover{color:var(--primary-2)}
+    .btn-outline{padding:6px 14px;border:1px solid #fff;border-radius:8px;background:transparent;color:#fff;cursor:pointer}
 
-    header {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 5%;
-    }
+    /* ===== Hero ===== */
+    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+          text-align:center;background:url('download (8).jpeg') center/cover no-repeat;position:relative;color:#fff}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .hero h1,.hero p,.hero .btn{position:relative;z-index:1}
+    .hero h1{font-size:3rem;font-weight:700;margin-bottom:16px;background:linear-gradient(135deg,#ff4081,#ff8a65);
+             -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{font-size:1.2rem;max-width:650px;margin:auto;margin-bottom:30px;color:#eee}
+    .btn{padding:12px 28px;border-radius:30px;font-weight:600;font-size:1rem;text-decoration:none;
+         background:linear-gradient(135deg,#ff4081,#e91e63);color:#fff;box-shadow:0 8px 25px rgba(0,0,0,.4)}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.6)}
 
-    header h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #00c6ff, #0072ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    /* ===== Sections ===== */
+    section{padding:80px 20px}
+    .section-header{text-align:center;margin-bottom:40px}
+    .section-header h2{font-size:2rem;margin:0}
+    .section-header p{color:var(--muted)}
 
-    nav a {
-      color: #fff;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
-    }
+    /* About */
+    .about-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);
+                border-radius:16px;padding:30px;color:#fff;box-shadow:var(--shadow);max-width:900px;margin:auto}
+    .about-card p{color:#ddd}
 
-    nav a:hover {
-      color: #00c6ff;
-    }
+    /* Explore cards */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+    .card{background:rgba(255,255,255,0.07);backdrop-filter:blur(8px);padding:25px;border-radius:12px;
+          box-shadow:0 6px 20px rgba(0,0,0,.25);color:#fff;transition:.3s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 8px 28px rgba(0,0,0,.35)}
 
-    .hero {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 5% 3rem;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      max-width: 700px;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-      color: #ddd;
-    }
-
-    .hero img {
-      width: 300px;
-      max-width: 90%;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      border: 4px solid rgba(255,255,255,0.2);
-    }
-
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      background: rgba(0,0,0,0.6);
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+    /* Footer */
+    footer{padding:25px;text-align:center;background:#111;color:#aaa}
   </style>
 </head>
 <body>
-  <!-- Header Navigation -->
-  <header>
-    <h1>MINDUPGRADE</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="signup.html">Sign Up</a>
-      <a href="login.html">Login</a>
-      <a href="works.html">How It Works</a>
-      <a href="departments.html">Departments</a>
-    </nav>
-  </header>
-      </section>
+  <!-- ===== NAVBAR ===== -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand"><span>Mind</span>Upgrade</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#explore">Explore</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Login</a>
+      </div>
+      <button id="themeToggle" class="btn-outline">🌓</button>
+    </div>
+  </nav>
 
-  <!-- Hero Section -->
+  <!-- ===== HERO ===== -->
   <section class="hero">
-    <h2>Boost Your Mind with Fun Quizzes</h2>
-    <p>
-      Welcome to <b>MINDUPGRADE</b>, your ultimate hub for interactive learning.  
-      Dive into exciting categories like Sports, Science, History, Psychology, Real Life and more.  
-      Test your knowledge with surprising, shocking, and entertaining quizzes designed to make learning enjoyable.
-    </p>
-    <img src="https://images.unsplash.com/photo-1581090700227-4c4b9078e3d7?auto=format&fit=crop&w=600&q=80" alt="MindUpgrade Illustration">
+    <h1>Elevate Your Mind</h1>
+    <p>Challenge your intellect, broaden your horizons, and embark on a journey of lifelong learning with MindUpgrade.</p>
+    <a href="#about" class="btn">Discover More</a>
   </section>
-      </section>
 
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="container">
+      <div class="about-card">
+        <div class="section-header">
+          <h2>About MindUpgrade</h2>
+          <p>Where curiosity meets mastery.</p>
+        </div>
+        <p>
+          MindUpgrade is an intellectual haven crafted to stimulate curiosity, refine critical thought,
+          and elevate the pursuit of knowledge. Through immersive quizzes, profound insights, and captivating explorations
+          across science, history, psychology, and beyond, MindUpgrade transforms learning into an inspiring odyssey.
+        </p>
+        <p style="text-align:center;margin-top:20px;">
+          <a href="department.html" class="btn">Start Exploring</a>
+        </p>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===== EXPLORE ===== -->
+  <section id="explore">
+    <div class="container">
+      <div class="section-header">
+        <h2>Explore</h2>
+        <p>Pick a path and start upgrading.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Quizzes</h3>
+          <p>Curated challenges that stretch your thinking and measure your progress.</p>
+        </div>
+        <div class="card">
+          <h3>Insights</h3>
+          <p>Concise, compelling ideas from across disciplines to enrich perspective.</p>
+        </div>
+        <div class="card">
+          <h3>Daily Brain Boost</h3>
+          <p>Short, potent mental workouts to keep your curiosity in peak form.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-
-  <!-- Footer -->
+  <!-- ===== FOOTER ===== -->
   <footer>
-    &copy; 2025 MINDUPGRADE. All rights reserved.
+    <p>&copy; <span id="year"></span> MindUpgrade. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Theme toggle
+    document.getElementById("themeToggle").addEventListener("click",()=>{
+      const root=document.documentElement;
+      const current=root.getAttribute("data-theme")||"light";
+      const next=current==="dark"?"light":"dark";
+      root.setAttribute("data-theme",next);
+    });
+  </script>
 </body>
 </html>
-
