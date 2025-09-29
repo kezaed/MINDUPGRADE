@@ -5,6 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MINDUPGRADE – Home</title>
   <style>
+        body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
+    header, main, footer {
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 1.2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #00c6ff;
+    }
+    main {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    main h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+    .departments {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .departments a {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: rgba(0, 198, 255, 0.85);
+      border-radius: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .departments a:hover {
+      background: rgba(0, 114, 255, 0.9);
+      transform: scale(1.05);
+    }
+    
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
     * {
@@ -127,6 +189,31 @@
     </p>
     <img src="https://images.unsplash.com/photo-1581090700227-4c4b9078e3d7?auto=format&fit=crop&w=600&q=80" alt="MindUpgrade Illustration">
   </section>
+  <h1>MINDUPGRADE</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="login.html">Login</a>
+      <a href="works.html">How It Works</a>
+      <a href="departments.html">Departments</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Select a Department</h2>
+    <div class="departments">
+      <a href="sports.html">Sports</a>
+      <a href="science.html">Science</a>
+      <a href="history.html">History</a>
+      <a href="psychology.html">Psychology</a>
+      <a href="socialmedia.html">Social Media</a>
+      <a href="reallife.html">Real Life</a>
+      <a href="news.html">News</a>
+      <a href="games.html">Games / Mind Tasks</a>
+      <a href="stories.html">Stories</a>
+      <a href="riddles.html">Riddles</a>
+    </div>
+  </main>
 
   <!-- Footer -->
   <footer>
@@ -134,3 +221,4 @@
   </footer>
 </body>
 </html>
+
