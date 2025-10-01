@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MINDUPGRADE – Home</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: #333;
+      background: #f9f9f9;
+    }
+
+    /* Navbar */
+    header {
+      background: #1a1a40;
+      padding: 15px 40px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ffcc00;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url("https://source.unsplash.com/1600x600/?mind,wellness") no-repeat center/cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+    }
+
+    /* Cards */
+    .cards-section {
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .cards-section h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 10px;
+      color: #1a1a40;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1a1a40;
+      color: white;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <div class="logo">MINDUPGRADE</div>
+      <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="mindfacts.html">MindFacts</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Welcome to MINDUPGRADE</h1>
+      <p>
+        At <strong>MINDUPGRADE</strong>, we believe in nurturing not only the mind but also 
+        the heart. Our platform is a safe space for psychology enthusiasts, young people, 
+        and anyone in need of guidance. Here, we focus on mental wellness, personal growth, 
+        and positive connections. Whether you are searching for inspiration, fun facts, 
+        or a place to share your thoughts, MINDUPGRADE is your home.
+      </p>
+      <p>
+        Through interactive experiences, counseling resources, and daily mind facts, 
+        we aim to help you upgrade your mind with love, wisdom, and confidence. 
+        Together, let’s create a supportive community where no one feels alone.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="cards-section">
+    <h2>Explore Psychology & Counseling</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?psychology,brain" alt="Psychology">
+        <div class="card-content">
+          <h3>Psychology Insights</h3>
+          <p>Discover how the mind works and learn life-changing strategies for mental strength.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?counseling,therapy" alt="Counseling">
+        <div class="card-content">
+          <h3>Counseling Support</h3>
+          <p>Find comfort in words, guidance, and encouragement from professionals and peers.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/400x300/?youth,community" alt="Community">
+        <div class="card-content">
+          <h3>Community Care</h3>
+          <p>Share your challenges, connect with others, and know that you are not alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MINDUPGRADE. All rights reserved.</p>
+  </footer>
+</body>
+</html>
