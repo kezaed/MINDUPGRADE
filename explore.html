@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MINDUPGRADE – Life Skills & Support</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4b79a1;
+      background: linear-gradient(to right, #283e51, #485563);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .post-form {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .post-form h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .post-form textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      resize: none;
+    }
+
+    .post-form button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #283e51;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .post-form button:hover {
+      background: #4b79a1;
+    }
+
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .post {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .post h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #283e51;
+    }
+
+    .post p {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .reply-box {
+      margin-top: 15px;
+    }
+
+    .reply-box textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      resize: none;
+    }
+
+    .reply-box button {
+      margin-top: 5px;
+      padding: 6px 15px;
+      background: #485563;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .replies {
+      margin-top: 10px;
+      padding-left: 20px;
+      border-left: 3px solid #eee;
+    }
+
+    .reply {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MindUpgrade – Life Skills & Support Forum</h1>
+    <p>Share your thoughts, find support, and learn from each other 💙</p>
+  </header>
+
+  <div class="container">
+    <!-- Post Form -->
+    <div class="post-form">
+      <h2>Share Your Thoughts</h2>
+      <textarea id="postInput" placeholder="Write something about your life experience, struggles, or advice..."></textarea>
+      <button onclick="addPost()">Post</button>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="posts" id="posts">
+      <!-- Posts will appear here -->
+    </div>
+  </div>
+
+  <script>
+    const postsContainer = document.getElementById('posts');
+
+    function addPost() {
+      const input = document.getElementById('postInput');
+      const text = input.value.trim();
+      if (text === '') return alert('Please write something before posting.');
+
+      // Create post element
+      const postDiv = document.createElement('div');
+      postDiv.classList.add('post');
+      postDiv.innerHTML = `
+        <h3>Anonymous User</h3>
+        <p>${text}</p>
+        <div class="replies"></div>
+        <div class="reply-box">
+          <textarea placeholder="Write a reply..."></textarea>
+          <button onclick="addReply(this)">Reply</button>
+        </div>
+      `;
+
+      postsContainer.prepend(postDiv);
+      input.value = '';
+    }
+
+    function addReply(button) {
+      const replyBox = button.previousElementSibling;
+      const replyText = replyBox.value.trim();
+      if (replyText === '') return alert('Please write something before replying.');
+
+      const replyDiv = document.createElement('div');
+      replyDiv.classList.add('reply');
+      replyDiv.innerText = replyText;
+
+      const repliesContainer = button.closest('.post').querySelector('.replies');
+      repliesContainer.appendChild(replyDiv);
+
+      replyBox.value = '';
+    }
+  </script>
+
+</body>
+</html>
